@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print Page</title>
+    <style>
+        .print-container {
+            text-align: center;
+            margin: 50px;
+        }
+    </style>
 </head>
 <body>
-    <h1>This is the Print Page</h1>
-    <p>If you see this text, the page is loading correctly!</p>
+    <div class="print-container">
+        <h1>Employee Work Order</h1>
+        <p><strong>Employee Name:</strong> <span id="employeeName"></span></p>
+        <p><strong>Project Name:</strong> <span id="projectName"></span></p>
+        <p><strong>Workorder Name:</strong> <span id="workorderName"></span></p>
+        <img id="qrCode" src="" alt="QR Code" width="150" height="150">
+        <br><br>
+        <button onclick="window.print()">Print this page</button>
+    </div>
+
+    <script>
+        // Function to get query parameters from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Set the dynamic data from the query parameters
+        document.getElementById('employeeName').textContent = getQueryParam('employee');
+        document.getElementById('projectName').textContent = getQueryParam('project');
+        document.getElementById('workorderName').textContent = getQueryParam('workorder');
+        document.getElementById('qrCode').src = getQueryParam('qrCodeUrl');
+    </script>
 </body>
 </html>
